@@ -47,23 +47,21 @@ p = eval(p) # cast string to expression
 
 fact = factor(p) # factor polynolmial
 
-print(fact)
+lstFactors = str(fact).replace(")", "").split("*(") # split each term into a list
+lstVals = [int(eval(f).evalf(subs={x:1})) for f in lstFactors] # The number of outcomes each factor has
 
-lstFactors = str(fact).replace(")", "").split("*(")
-lstVals = [int(eval(f).evalf(subs={x:1})) for f in lstFactors]
-
-lstFactorsNoX = lstFactors[1:] * 2
-lstDie = []
+lstFactorsNoX = lstFactors[1:] * 2 # removing x term since both dice need it, and multiplying by 2 for each die
+lstDie = [] # pairs of die that are possible n-sided die 
 for L in range(len(lstFactorsNoX)//2 + 1):
     for subset in combinations(lstFactorsNoX, L):
         if(convert_factored_string(subset) != "0"):
-            if(int(eval(convert_factored_string(subset)).evalf(subs={x:1})) == NUM_SIDES):
+            if(int(eval(convert_factored_string(subset)).evalf(subs={x:1})) == NUM_SIDES): # If one die has n-sides, other automcatically has as well
                 lstDie.append(list(subset))
 
 uniqueDie = []
 dicePairs = []
 for die in lstDie:
-    if(not isDup(die, uniqueDie)):
+    if(not isDup(die, uniqueDie)): # ensuring no duplicates
         dicePairs.append((die, get_complement(lstFactorsNoX, die)))
         uniqueDie.append(die)
         uniqueDie.append(get_complement(lstFactorsNoX, die))
@@ -73,9 +71,10 @@ validPairs = []
 for dice in dicePairs:
     d1 = str(eval("x*" + convert_factored_string(dice[0])).expand())
     d2 = str(eval("x*" + convert_factored_string(dice[1])).expand())
-    if(not("-" in d1 or "-" in d2)):
+    if(not("-" in d1 or "-" in d2)): # dice are only valid if there are no negative (can't have -1 faces)
+        # print(dice)
         validPairs.append([d1, d2])
 
-
+# print valid dice pairs
 for dice in validPairs:
     print("1st Die: " + dice[0] + "\n2nd Die: " + dice[1] + "\n\n")

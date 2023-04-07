@@ -1,7 +1,7 @@
 # A script for visualising venn diagrams with n sets, using turtle
 import turtle
 
-NUM_SETS = 5
+NUM_SETS = 6 # number of sets to form the venn diagram with
 
 turtle.title("Venn Diagram")
 
