@@ -3,7 +3,7 @@ Applying the concepts I learned in my **MAT344: Introduction to Cominatorics** c
 
 # graphs/kruskalsAlgo.py
 Kruskal's algorithm is used to find the minimal weight spanning tree of a connected, undirected, weighted graph (this project assumes the graph is connected). More about the algorithm can be found here: [https://en.wikipedia.org/wiki/Kruskal%27s_algorithm](https://en.wikipedia.org/wiki/Kruskal%27s_algorithm)
-<br/>
+<br/><br/>
 This program implements Kruskal's, and visualizes the graph with the spanning tree.
 
 
